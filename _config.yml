@@ -1,0 +1,31 @@
+# Site settings
+title: Branko Tomić
+email: klomontes@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Product designer and developer.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://brankotomic.com" # the base hostname & protocol for your site
+github_username:  klomontes
+permalink: /:year/:month/:day/:title:output_ext
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-postcss
+
+sass:
+  implementation: sass-embedded
+  load_paths:
+    - _sass
+
+postcss:
+  cache: false

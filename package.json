@@ -1,0 +1,18 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:klomontes/portfolio.git",
+  "author": "Branko Tomic <klomontes@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.0",
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.7",
+    "tailwindcss": "^3.0.23"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "cssnano": "^5.1.0"
+  }
+}
