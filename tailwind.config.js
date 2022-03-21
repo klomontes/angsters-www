@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'bw-drum': "url('/img/bg.jpg')",
+        'kaleidoscope': "url('/img/bg_2.jpeg')",
       }
     },
   },
