@@ -9,8 +9,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'bw-drum': "url('/img/bg.jpg')",
-        'kaleidoscope': "url('/img/bg_2.jpeg')",
+        'kaleidoscope': "url('/img/bg.jpeg')",
       }
     },
   },

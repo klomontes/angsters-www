@@ -29,3 +29,10 @@ sass:
 
 postcss:
   cache: false
+
+exclude:
+  - package.json
+  - yarn.lock
+  - tailwind.config.js
+  - postcss.config.js
+  - README.md
