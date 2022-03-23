@@ -2,7 +2,7 @@
 title: Angsters
 email: theangsters@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  With the members’ diverse musical tastes, their music is probably best described as fusion. Or indie. Maybe alternative rock?
+  Angsters is an instrumental trio from Belgrade, Serbia.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://angste.rs" # the base hostname & protocol for your site
 github_username:  klomontes
