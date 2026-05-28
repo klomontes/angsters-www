@@ -1,7 +1,5 @@
-_site
-.sass-cache
-.jekyll-metadata
-.jekyll-cache
-.git
-.idea
 node_modules
+dist
+.astro
+.idea
+.DS_Store

@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "How to implement a bad design"
 date:   2021-11-08
 categories: ux
