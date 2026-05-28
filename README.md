@@ -5,12 +5,12 @@ Astro-powered static site for Angsters.
 ## Development
 
 ```sh
-yarn install
-yarn dev
+npm install
+npm run dev
 ```
 
 ## Build
 
 ```sh
-yarn build
+npm run build
 ```

@@ -4,6 +4,7 @@
   "repository": "git@github.com:klomontes/portfolio.git",
   "author": "Branko Tomic <klomontes@gmail.com>",
   "license": "MIT",
+  "packageManager": "npm@11.11.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
