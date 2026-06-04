@@ -1,71 +1,219 @@
 ---
+import Image from 'astro/components/Image.astro';
+import branko from '../assets/images/branko.png';
+import donka from '../assets/images/donka.png';
+import logo from '../assets/images/logo.svg';
+import mirko from '../assets/images/mirko.png';
+import pavle from '../assets/images/pavle.png';
+import stars from '../assets/images/stars.png';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const ep = {
+  title: 'Angsters',
+  subtitle: 'Debut EP',
+  release: '2025',
+  albumArt:
+    'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d1/87/09/d187091d-6de5-0acd-c646-1b17865c25d7/artwork.jpg/600x600bb.jpg',
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/album/6W5dTaKy0IDv1Hitp4Q51v?utm_source=generator&theme=0',
+};
+
 const tracks = [
+  ['Iris', '4:03'],
+  ['Khandi', '4:04'],
+  ['Vene', '4:26'],
+  ['Love Funk', '3:46'],
+];
+
+const platformLinks = [
   {
-    id: '1186399666',
-    color: '748490',
-    title: 'Dedikacija',
-    url: 'https://soundcloud.com/angsters/dedikacija',
+    label: 'All platforms',
+    href: 'https://distrokid.com/hyperfollow/angsters/angsters',
+    featured: true,
   },
   {
-    id: '1186385470',
-    color: '788494',
-    title: 'Slobodan Rad',
-    url: 'https://soundcloud.com/angsters/slobodan-rad',
+    label: 'Spotify',
+    href: 'https://open.spotify.com/album/6W5dTaKy0IDv1Hitp4Q51v?si=Y7suV0MdRJeeIH7zZFpYsw',
   },
   {
-    id: '1186397209',
-    color: '748490',
-    title: 'Držite se, gospodine',
-    url: 'https://soundcloud.com/angsters/drzite-se-gospodine-1',
+    label: 'Apple Music',
+    href: 'https://music.apple.com/us/album/angsters-ep/1851821466',
+  },
+  {
+    label: 'YouTube Music',
+    href: 'https://music.youtube.com/playlist?list=OLAK5uy_nsqojalgxQybKDcT47x-L0YLcRcXnjM4E&si=jOLg5yBiGaE3MSEX',
+  },
+  {
+    label: 'YouTube',
+    href: 'https://youtube.com/playlist?list=PLBU55HbA1swhbDBA4o9DlXYTegtrka7O9&si=l2vx8ReX9kwDs2oP',
+  },
+  {
+    label: 'Bandcamp',
+    href: 'https://angsters.bandcamp.com/album/angsters',
+  },
+  {
+    label: 'Amazon Music',
+    href: 'https://music.amazon.com/albums/B0G1225VV5',
+  },
+  {
+    label: 'Deezer',
+    href: 'https://link.deezer.com/s/31Bfgl1vzSrypM8UL1xrJ',
+  },
+  {
+    label: 'iHeartRadio',
+    href: 'https://www.iheart.com/artist/id-48541687/albums/id-359422392',
   },
 ];
 
 const socialLinks = [
-  ['YouTube', 'https://www.youtube.com/channel/UChVE8OsJIOuqndJiMqRuEsA'],
-  ['SoundCloud', 'https://soundcloud.com/angsters?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing'],
-  ['Bandcamp', 'https://angsters.bandcamp.com/'],
-  ['Instagram', 'https://www.instagram.com/theangsters/'],
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/theangsters/',
+    featured: true,
+  },
+  {
+    label: 'YouTube Music',
+    href: 'https://music.youtube.com/@theangsters',
+  },
+  {
+    label: 'Bandcamp',
+    href: 'https://angsters.bandcamp.com/',
+  },
 ];
+
+const sameAsLinks = Array.from(new Set([...socialLinks.map(({ href }) => href), ...platformLinks.map(({ href }) => href)]));
+const trackData = tracks.map(([name, duration], index) => {
+  const [minutes, seconds] = duration.split(':');
+
+  return {
+    '@type': 'MusicRecording',
+    position: index + 1,
+    name,
+    duration: `PT${minutes}M${seconds}S`,
+  };
+});
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: 'Angsters',
+  url: 'https://angste.rs/',
+  genre: ['Alternative rock', 'Indie rock', 'Instrumental'],
+  sameAs: sameAsLinks,
+  album: {
+    '@type': 'MusicAlbum',
+    name: 'Angsters',
+    image: ep.albumArt,
+    albumReleaseType: 'EPRelease',
+    datePublished: '2025-11-14',
+    byArtist: {
+      '@type': 'MusicGroup',
+      name: 'Angsters',
+    },
+    track: trackData,
+  },
+};
 ---
 
-<BaseLayout>
-  <main class="flex h-full w-full flex-col p-6 backdrop-blur-lg md:w-[500px] md:p-10">
+<BaseLayout
+  title="Angsters - Listen"
+  description="Listen to Angsters on Spotify, Apple Music, YouTube Music, Bandcamp, and more."
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <div class="space-scene" aria-hidden="true">
+    <Image
+      src={stars}
+      alt=""
+      class="space-scene__stars"
+      widths={[960, 1440, 1920, 2630]}
+      sizes="100vw"
+      loading="eager"
+      decoding="async"
+    />
+    <Image
+      src={mirko}
+      alt=""
+      class="space-character space-character--mirko"
+      widths={[280, 420, 560, 720]}
+      sizes="(min-width: 1024px) 23vw, 58vw"
+      loading="eager"
+      decoding="async"
+    />
+    <Image
+      src={branko}
+      alt=""
+      class="space-character space-character--branko"
+      widths={[280, 420, 560, 720]}
+      sizes="(min-width: 1024px) 22vw, 76vw"
+      loading="eager"
+      decoding="async"
+    />
+    <Image
+      src={donka}
+      alt=""
+      class="space-character space-character--donka"
+      widths={[180, 260, 340, 460]}
+      sizes="(min-width: 1024px) 16vw, 42vw"
+      loading="eager"
+      decoding="async"
+    />
+    <Image
+      src={pavle}
+      alt=""
+      class="space-character space-character--pavle"
+      widths={[32, 48, 64, 96]}
+      sizes="clamp(28px, 3vw, 44px)"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <main class="relative z-10 flex min-h-full w-full max-w-2xl flex-col bg-black/45 p-6 shadow-2xl backdrop-blur-md md:p-10">
     <div>
       <h1 class="mb-8 text-3xl font-extrabold leading-none tracking-tight sm:text-4xl lg:text-6xl">
-        ANGSTERS
+        <Image src={logo} alt="Angsters" class="h-auto w-full max-w-[360px]" priority />
       </h1>
-      <p class="mb-6 text-gray-500 dark:text-white/60">
+      <p class="max-w-xl text-sm leading-6 text-white/80 sm:text-base">
         With the members' diverse musical tastes, their music is probably best described as fusion. Or indie. Maybe alternative rock?
       </p>
     </div>
 
-    <div class="my-10 space-y-4">
-      {
-        tracks.map((track) => (
-          <div>
-            <iframe
-              width="100%"
-              height="20"
-              class="border-0"
-              allow="autoplay"
-              src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.id}&color=%23${track.color}&inverse=true&auto_play=false&show_user=true`}
-              title={`Angsters - ${track.title}`}
-            />
-            <div class="truncate text-[10px] font-thin text-[#cccccc] [font-family:Interstate,Lucida_Grande,Lucida_Sans_Unicode,Lucida_Sans,Garuda,Verdana,Tahoma,sans-serif]">
-              <a class="text-[#cccccc] no-underline" href="https://soundcloud.com/angsters" title="Angsters" target="_blank" rel="noreferrer">
-                Angsters
+    <section class="my-10" aria-labelledby="listen-title">
+      <div class="order-1 min-w-0 md:order-2">
+        <p class="text-xs font-bold uppercase text-[#e6542c]">{ep.subtitle} · {ep.release}</p>
+        <h2 id="listen-title" class="mt-1 text-2xl font-extrabold leading-tight">{ep.title}</h2>
+
+        <iframe
+          class="mt-4 h-[352px] w-full rounded-sm border-0 shadow-xl"
+          src={ep.spotifyEmbedUrl}
+          width="100%"
+          height="352"
+          title="Spotify player for Angsters EP"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="eager"
+        />
+
+        <nav class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3" aria-label="Listen on streaming platforms">
+          {
+            platformLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                class:list={[
+                  'flex min-h-11 items-center justify-center rounded-sm border px-3 py-2 text-center text-sm font-bold transition hover:-translate-y-0.5 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-[#e6542c] focus:ring-offset-2 focus:ring-offset-black',
+                  link.featured
+                    ? 'col-span-2 border-[#e6542c] bg-[#e6542c] text-black sm:col-span-1'
+                    : 'border-white/20 bg-white/10 text-white',
+                ]}
+              >
+                {link.label}
               </a>
-              {' · '}
-              <a class="text-[#cccccc] no-underline" href={track.url} title={track.title} target="_blank" rel="noreferrer">
-                {track.title}
-              </a>
-            </div>
-          </div>
-        ))
-      }
-    </div>
+            ))
+          }
+        </nav>
+      </div>
+    </section>
 
     <div class="my-10 -mx-5">
       <a
@@ -82,17 +230,29 @@ const socialLinks = [
     </div>
 
     <footer class="mt-auto">
-      <ul class="flex flex-wrap gap-x-4 gap-y-2">
+      <nav aria-label="Social media">
+        <ul class="flex flex-wrap gap-2 text-sm">
         {
-          socialLinks.map(([label, href]) => (
+          socialLinks.map((link) => (
             <li>
-              <a href={href} target="_blank" rel="noreferrer">
-                {label}
+              <a
+                class:list={[
+                  'flex min-h-11 items-center justify-center rounded-sm border px-4 py-2 font-bold transition hover:-translate-y-0.5 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-[#e6542c] focus:ring-offset-2 focus:ring-offset-black',
+                  link.featured
+                    ? 'border-[#e6542c] bg-[#e6542c] text-black'
+                    : 'border-white/20 bg-white/10 text-white',
+                ]}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {link.label}
               </a>
             </li>
           ))
         }
-      </ul>
+        </ul>
+      </nav>
     </footer>
   </main>
 </BaseLayout>

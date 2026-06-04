@@ -10,6 +10,8 @@ type Props = {
 const { title = site.title, description = site.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
 const socialImage = new URL(site.socialImage, Astro.site ?? site.url);
+const canonicalUrl = canonical.toString();
+const socialImageUrl = socialImage.toString();
 ---
 
 <!doctype html>
@@ -20,14 +22,21 @@ const socialImage = new URL(site.socialImage, Astro.site ?? site.url);
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#020302" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/feed.xml" />
 
-    <meta property="og:url" content={site.url} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={site.title} />
-    <meta property="og:description" content={site.description} />
-    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
 
     <script is:inline>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -37,7 +46,7 @@ const socialImage = new URL(site.socialImage, Astro.site ?? site.url);
       })(window,document,'script','dataLayer','GTM-K8JBXTN');
     </script>
   </head>
-  <body class="h-full bg-black bg-kaleidoscope bg-cover bg-center bg-no-repeat text-white">
+  <body class="h-full overflow-x-hidden bg-[#020302] bg-cover bg-center bg-no-repeat text-white">
     <noscript>
       <iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-K8JBXTN"

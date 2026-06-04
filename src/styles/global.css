@@ -5,3 +5,184 @@
 html {
   -webkit-font-smoothing: antialiased;
 }
+
+body {
+  background-color: #020302;
+}
+
+.space-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(230, 84, 44, 0.14), transparent 24rem),
+    radial-gradient(circle at 18% 72%, rgba(70, 154, 189, 0.13), transparent 22rem),
+    #020302;
+}
+
+.space-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(2, 3, 2, 0.34), rgba(2, 3, 2, 0.08) 54%, rgba(2, 3, 2, 0.2)),
+    linear-gradient(180deg, rgba(2, 3, 2, 0.14), transparent 34%, rgba(2, 3, 2, 0.24));
+}
+
+.space-scene__stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.84;
+  transform-origin: center;
+  animation: star-drift 72s ease-in-out infinite;
+}
+
+.space-character {
+  position: absolute;
+  z-index: 4;
+  width: var(--space-width);
+  max-width: none;
+  height: auto;
+  opacity: var(--space-opacity, 0.84);
+  filter: drop-shadow(0 1.25rem 2.5rem rgba(0, 0, 0, 0.46));
+  transform: translate3d(0, 0, 0) rotate(var(--space-rotate, 0deg));
+  transform-origin: center;
+  user-select: none;
+  animation: space-float var(--space-duration, 14s) ease-in-out infinite;
+  will-change: transform;
+}
+
+.space-character--mirko {
+  --space-width: clamp(14rem, 23vw, 24rem);
+  --space-rotate: -4deg;
+  --space-float-x: 0.85rem;
+  --space-float-y: 1.4rem;
+  --space-float-rotate: 2deg;
+  --space-duration: 15s;
+  top: clamp(1.5rem, 6vh, 4rem);
+  right: clamp(13rem, 20vw, 22rem);
+}
+
+.space-character--branko {
+  --space-width: clamp(13rem, 22vw, 22rem);
+  --space-rotate: -3deg;
+  --space-float-x: -0.9rem;
+  --space-float-y: 1.1rem;
+  --space-float-rotate: -1.8deg;
+  --space-duration: 16s;
+  right: clamp(13rem, 25vw, 22rem);
+  bottom: clamp(2rem, 6vh, 4rem);
+}
+
+.space-character--donka {
+  --space-width: clamp(10rem, 16vw, 17rem);
+  --space-rotate: 2deg;
+  --space-float-x: 0.75rem;
+  --space-float-y: -1.2rem;
+  --space-float-rotate: 1.6deg;
+  --space-duration: 13s;
+  top: clamp(16rem, 35vh, 24rem);
+  right: clamp(0rem, 1vw, 2rem);
+}
+
+.space-character--pavle {
+  --space-width: clamp(1.75rem, 3vw, 2.75rem);
+  z-index: 3;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  filter: drop-shadow(0 0.85rem 1.4rem rgba(0, 0, 0, 0.42));
+  animation: pavle-fly 30s linear infinite;
+}
+
+@keyframes star-drift {
+  0%,
+  100% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: scale(1.07) translate3d(-1.1rem, 0.85rem, 0);
+  }
+}
+
+@keyframes space-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--space-rotate, 0deg));
+  }
+
+  50% {
+    transform:
+      translate3d(var(--space-float-x, 0.75rem), var(--space-float-y, 1rem), 0)
+      rotate(calc(var(--space-rotate, 0deg) + var(--space-float-rotate, 1deg)));
+  }
+}
+
+@keyframes pavle-fly {
+  0% {
+    transform: translate3d(-14vw, 62vh, 0) rotate(-16deg) scale(0.82);
+  }
+
+  48% {
+    transform: translate3d(58vw, 38vh, 0) rotate(7deg) scale(1);
+  }
+
+  100% {
+    transform: translate3d(114vw, 18vh, 0) rotate(22deg) scale(0.82);
+  }
+}
+
+@media (max-width: 767px) {
+  .space-scene::after {
+    background:
+      linear-gradient(180deg, rgba(2, 3, 2, 0.16), rgba(2, 3, 2, 0.32)),
+      linear-gradient(90deg, rgba(2, 3, 2, 0.14), rgba(2, 3, 2, 0.22));
+  }
+
+  .space-character--mirko {
+    --space-width: clamp(12rem, 58vw, 18rem);
+    --space-opacity: 0.66;
+    top: 8rem;
+    right: -18vw;
+  }
+
+  .space-character--branko {
+    --space-width: clamp(14rem, 76vw, 21rem);
+    --space-opacity: 0.64;
+    right: auto;
+    bottom: 8vh;
+    left: -18vw;
+  }
+
+  .space-character--donka {
+    --space-width: clamp(9rem, 42vw, 14rem);
+    --space-opacity: 0.68;
+    top: 62vh;
+    right: -16vw;
+  }
+
+  .space-character--pavle {
+    --space-width: clamp(1.75rem, 8vw, 2.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-scene__stars,
+  .space-character {
+    animation: none;
+  }
+
+  .space-character--pavle {
+    transform: translate3d(78vw, 18vh, 0) rotate(12deg) scale(0.9);
+    opacity: 0.48;
+  }
+}
