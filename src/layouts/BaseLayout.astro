@@ -25,6 +25,8 @@ const socialImageUrl = socialImage.toString();
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#020302" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" sizes="512x512" href={site.favicon} />
+    <link rel="apple-touch-icon" sizes="180x180" href={site.appleTouchIcon} />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/feed.xml" />
 
     <meta property="og:url" content={canonicalUrl} />
@@ -33,10 +35,15 @@ const socialImageUrl = socialImage.toString();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content={site.socialImageType} />
+    <meta property="og:image:width" content={String(site.socialImageWidth)} />
+    <meta property="og:image:height" content={String(site.socialImageHeight)} />
+    <meta property="og:image:alt" content={site.socialImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={site.socialImageAlt} />
 
     <script is:inline>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
